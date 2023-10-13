@@ -1,5 +1,4 @@
-import type { CoulisseOptions } from "$lib";
-import type { Mandatory } from "./types";
+import type { Mandatory, CoulisseOptions, ScrollPercentages } from "./types";
 
 // * Dictionary
 export const terms = {
@@ -7,8 +6,8 @@ export const terms = {
     singular: "poulie",
     plural: "poulies",
     quit: '\n💤 Deactivating...',
-    yScroll: `Y scroll percentage:`,
-    xScroll: `x scroll percentage:`,
+    yScroll: `Y scroll %:`,
+    xScroll: `x scroll %:`,
 };
 
 export const prompts = {
@@ -32,13 +31,12 @@ export const round = (val: number, decimals: number): number => {
     return Math.round(val * multiplier) / multiplier;
 };
 
-
-export const debugCoords = (options: CoulisseOptions, coords: object) => {
+export const debug = (options: CoulisseOptions, message: string | ScrollPercentages) => {
     if (!options.debug) return;
-    console.log(coords)
-}
-export const debugPrompts = (options: CoulisseOptions, prompt: string) => {
-    if (!options.debug) return;
-    console.log(prompt)
-}
 
+    if (typeof message === 'string') {
+        console.log(terms.emoji, message);
+    } else if (typeof message === 'object') {
+        console.log(terms.emoji, message);
+    }
+};

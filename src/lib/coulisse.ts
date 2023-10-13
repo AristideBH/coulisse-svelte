@@ -1,5 +1,5 @@
 import type { CoulisseOptions, ScrollPercentages } from "./types";
-import { terms, prompts, round, debugCoords, debugPrompts, defaults } from "./helpers";
+import { terms, prompts, round, debug, defaults } from "./helpers";
 
 /**
  * Initializes Coulisse, a scroll synchronization utility, to enable synchronized scrolling for a group of HTML elements.
@@ -17,11 +17,11 @@ const coulisse = (elements: HTMLElement[], options: CoulisseOptions = defaults):
     */
     const targetNumber = elements.length,
         poulieTerm = targetNumber <= 1 ? terms.singular : terms.plural;
-    debugPrompts(opt, `${targetNumber} ${poulieTerm} provided.`);
+    debug(opt, `${targetNumber} ${poulieTerm} provided.`);
 
     // Check if elements are provided, and deactivate Coulisse if that's the case.
     if (!elements || targetNumber === 0) {
-        debugPrompts(opt, prompts.noPoulies);
+        debug(opt, prompts.noPoulies);
         return;
     }
 
@@ -77,14 +77,13 @@ const coulisse = (elements: HTMLElement[], options: CoulisseOptions = defaults):
 
         // Set the scroll position based on the specified direction or both.
         if (options.direction === 'y') {
-            debugPrompts(options, `${terms.yScroll} ${scrollYPercentage}`);
+            debug(options, `${terms.yScroll} ${scrollYPercentage}`);
             el.scrollTop = scrollY;
         } else if (options.direction === 'x') {
-            debugPrompts(options, `${terms.xScroll} ${scrollXPercentage}`);
+            debug(options, `${terms.xScroll} ${scrollXPercentage}`);
             el.scrollLeft = scrollX;
         } else {
-            // debugPrompts({ xScrollPercentage: scrollXPercentage, yScrollPercentage: scrollYPercentage }, true);
-            debugCoords(options, { xScrollPercentage: scrollXPercentage, yScrollPercentage: scrollYPercentage })
+            debug(options, { scrollXPercentage, scrollYPercentage })
             el.scrollTop = scrollY;
             el.scrollLeft = scrollX;
         }
@@ -135,24 +134,49 @@ const coulisse = (elements: HTMLElement[], options: CoulisseOptions = defaults):
     }
 
 
+    /**
+     * Sets the scroll position of the document body based on the provided scroll percentages and options.
+     * @param percentages - An object containing scroll percentage values for scrollY and scrollX.
+     * @param percentages.scrollYPercentage - The scroll percentage for the vertical scroll (0 to 100).
+     * @param percentages.scrollXPercentage - The scroll percentage for the horizontal scroll (0 to 100).
+     */
+    const setBodyScrollPosition = (percentages: ScrollPercentages) => {
+        const { scrollYPercentage, scrollXPercentage } = percentages;
+        const { direction } = options;
+
+        const top = (document.body.scrollHeight - window.innerHeight) * (scrollYPercentage / 100);
+        const left = (document.body.scrollWidth - window.innerWidth) * (scrollXPercentage / 100);
+
+        window.scrollTo({
+            top: direction === 'y' ? top : (direction === 'x' ? document.body.scrollTop : top),
+            left: direction === 'x' ? left : (direction === 'y' ? document.body.scrollLeft : left),
+            behavior: 'auto'
+        });
+    };
+
+
     // * SCROLL LISTENERS 
 
     // If there's only one element provided
     if (targetNumber === 1) {
-        // Make sure the bindBody option is set to true, otherwise adding a listener in not necessary.
+        // Make sure the bindBody option is set to true, otherwise adding a listener is not necessary.
         if (!opt.bindBody) {
-            debugPrompts(opt, prompts.bodyAlert)
+            debug(opt, prompts.bodyAlert)
             return
         }
 
         const target = elements[0];
         target.addEventListener('scroll', () => {
-            setScrollPercentage(target, calculateScrollPercentages(target), opt);
+            const scrollYPercentage = round(target.scrollTop / (target.scrollHeight - target.offsetHeight) * 100, opt.decimal);
+            const scrollXPercentage = round(target.scrollLeft / (target.scrollWidth - target.offsetWidth) * 100, opt.decimal);
+            setBodyScrollPosition({ scrollYPercentage, scrollXPercentage })
         }, { passive: true });
 
-        // Additionally, add a global scroll listener for the same element
+        // Additionally, add a global scroll listener for the window element
         document.addEventListener("scroll", () => {
-            setScrollPercentage(target, calculateScrollPercentages(target), opt);
+            const scrollYPercentage = round(window.scrollY / (document.body.offsetHeight - window.innerHeight) * 100, opt.decimal);
+            const scrollXPercentage = round(window.scrollX / (document.body.offsetWidth - window.innerWidth) * 100, opt.decimal);
+            setScrollPercentage(target, { scrollYPercentage, scrollXPercentage });
         }, { passive: true });
 
     } else {
