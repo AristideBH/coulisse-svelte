@@ -1,37 +1,5 @@
-const dico = {
-    emoji: "☸️",
-    poulieSingular: "poulie",
-    pouliePlural: "poulies",
-};
-
-interface ScrollPercentages {
-    scrollYPercentage: number;
-    scrollXPercentage: number;
-}
-
-export type CoulisseOptions = {
-    bindBody?: boolean;
-    direction?: "y" | "x" | 'both';
-    decimal?: 1 | 2 | 3 | 4 | 5;
-    debug?: boolean;
-}
-
-type Mandatory<T> = {
-    [K in keyof T]-?: T[K];
-};
-
-const defaults: Mandatory<CoulisseOptions> = {
-    direction: 'both',
-    bindBody: true,
-    decimal: 3,
-    debug: false,
-};
-
-const round = (val: number, decimals: number): number => {
-    const multiplier = Math.pow(10, decimals);
-    return Math.round(val * multiplier) / multiplier;
-};
-
+import type { CoulisseOptions, ScrollPercentages } from "./types";
+import { terms, prompts, round, debugCoords, debugPrompts, defaults } from "./helpers";
 
 /**
  * Initializes Coulisse, a scroll synchronization utility, to enable synchronized scrolling for a group of HTML elements.
@@ -40,28 +8,20 @@ const round = (val: number, decimals: number): number => {
  * @param {CoulisseOptions} [options=defaults] - Optional settings for scroll synchronization.
  */
 const coulisse = (elements: HTMLElement[], options: CoulisseOptions = defaults): void => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const debugPrompt = (toLog: any, coords = false): void => {
-        if (!options.debug) return;
-        const message = coords
-            ? `${dico.emoji}\t\tx: ${toLog.xScrollPercentage}% \t|\ty: ${toLog.yScrollPercentage}%`
-            : `${dico.emoji} ${toLog}`;
+    // Merged passed options with defaults
+    const opt = { ...defaults, ...options }
 
-        console.log(message);
-    };
-
-    // * INTIAL CHECK
+    // * INITIAL CHECK
     /**
     * This section determines the correct term for "poulie" based on the number of elements.
     */
-    const poulieTerm = elements.length === 1 || elements.length === 0
-        ? dico.poulieSingular
-        : dico.pouliePlural;
-    debugPrompt(`${elements.length} ${poulieTerm} provided.`);
+    const targetNumber = elements.length,
+        poulieTerm = targetNumber <= 1 ? terms.singular : terms.plural;
+    debugPrompts(opt, `${targetNumber} ${poulieTerm} provided.`);
 
-    // Check if no elements are provided, and deactivate Coulisse if that's the case.
-    if (!elements || elements.length === 0) {
-        debugPrompt(`Coulisse can't work without ${dico.pouliePlural}\n💤 Deactivating...`);
+    // Check if elements are provided, and deactivate Coulisse if that's the case.
+    if (!elements || targetNumber === 0) {
+        debugPrompts(opt, prompts.noPoulies);
         return;
     }
 
@@ -85,9 +45,9 @@ const coulisse = (elements: HTMLElement[], options: CoulisseOptions = defaults):
         height: number,
         width: number
     ): ScrollPercentages => {
-        const decimal = options.decimal || defaults.decimal;
-        const scrollYPercentage = round((scrollTop * 100) / height, decimal);
-        const scrollXPercentage = round((scrollLeft * 100) / width, decimal);
+        const decimal = opt.decimal || defaults.decimal,
+            scrollYPercentage = round((scrollTop * 100) / height, decimal),
+            scrollXPercentage = round((scrollLeft * 100) / width, decimal);
         return { scrollYPercentage, scrollXPercentage };
     };
 
@@ -108,22 +68,23 @@ const coulisse = (elements: HTMLElement[], options: CoulisseOptions = defaults):
         if (!el) return;
 
         // Calculate the maximum scrollable height and width.
-        const height = el.scrollHeight - el.getBoundingClientRect().height;
-        const width = el.scrollWidth - el.getBoundingClientRect().width;
+        const height = el.scrollHeight - el.getBoundingClientRect().height,
+            width = el.scrollWidth - el.getBoundingClientRect().width;
 
         // Calculate the desired scroll positions based on percentages.
-        const scrollX = (scrollXPercentage * width) / 100;
-        const scrollY = (scrollYPercentage * height) / 100;
+        const scrollX = (scrollXPercentage * width) / 100,
+            scrollY = (scrollYPercentage * height) / 100;
 
         // Set the scroll position based on the specified direction or both.
         if (options.direction === 'y') {
-            debugPrompt(`Y scroll percentage: ${scrollYPercentage}`);
+            debugPrompts(options, `${terms.yScroll} ${scrollYPercentage}`);
             el.scrollTop = scrollY;
         } else if (options.direction === 'x') {
-            debugPrompt(`X scroll percentage: ${scrollXPercentage}`);
+            debugPrompts(options, `${terms.xScroll} ${scrollXPercentage}`);
             el.scrollLeft = scrollX;
         } else {
-            debugPrompt({ xScrollPercentage: scrollXPercentage, yScrollPercentage: scrollYPercentage }, true);
+            // debugPrompts({ xScrollPercentage: scrollXPercentage, yScrollPercentage: scrollYPercentage }, true);
+            debugCoords(options, { xScrollPercentage: scrollXPercentage, yScrollPercentage: scrollYPercentage })
             el.scrollTop = scrollY;
             el.scrollLeft = scrollX;
         }
@@ -141,9 +102,9 @@ const coulisse = (elements: HTMLElement[], options: CoulisseOptions = defaults):
      */
     const calculateScrollPercentages = (element: HTMLElement): ScrollPercentages => {
         // Extract the current scroll positions and the maximum scrollable dimensions.
-        const { scrollTop, scrollLeft } = element;
-        const height = element.scrollHeight - element.getBoundingClientRect().height;
-        const width = element.scrollWidth - element.getBoundingClientRect().width;
+        const { scrollTop, scrollLeft } = element,
+            height = element.scrollHeight - element.getBoundingClientRect().height,
+            width = element.scrollWidth - element.getBoundingClientRect().width;
 
         // Calculate and return the scroll percentages using the getScrollPercentages function.
         return getScrollPercentages({ scrollTop, scrollLeft }, height, width);
@@ -177,26 +138,27 @@ const coulisse = (elements: HTMLElement[], options: CoulisseOptions = defaults):
     // * SCROLL LISTENERS 
 
     // If there's only one element provided
-    if (elements.length === 1) {
-        // Make sure the bindBody option is true, otherwise adding a listener in not necessary.
-        if (!options.bindBody) {
-            debugPrompt(`You only provided one ${dico.poulieSingular} with no bindBody option.\n💤 Deactivating...`)
+    if (targetNumber === 1) {
+        // Make sure the bindBody option is set to true, otherwise adding a listener in not necessary.
+        if (!opt.bindBody) {
+            debugPrompts(opt, prompts.bodyAlert)
             return
         }
 
-        const element = elements[0];
-        element.addEventListener('scroll', () => {
-            setScrollPercentage(element, calculateScrollPercentages(element), options);
+        const target = elements[0];
+        target.addEventListener('scroll', () => {
+            setScrollPercentage(target, calculateScrollPercentages(target), opt);
         }, { passive: true });
 
         // Additionally, add a global scroll listener for the same element
         document.addEventListener("scroll", () => {
-            setScrollPercentage(element, calculateScrollPercentages(element), options);
+            setScrollPercentage(target, calculateScrollPercentages(target), opt);
         }, { passive: true });
+
     } else {
         // If multiple elements are provided, add scroll listeners to synchronize their scroll positions.
-        for (const element of elements) {
-            addScrollListener(element, elements, options);
+        for (const target of elements) {
+            addScrollListener(target, elements, opt);
         }
     }
 };

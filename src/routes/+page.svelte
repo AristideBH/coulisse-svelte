@@ -3,7 +3,7 @@
 	import coulisse from '$lib';
 
 	let poulies: HTMLElement[] = [];
-	onMount(() => coulisse(poulies, { decimal: 3, debug: true, bindBody: true }));
+	onMount(() => coulisse(poulies, { decimal: 3, debug: false, bindBody: true }));
 </script>
 
 <main>
