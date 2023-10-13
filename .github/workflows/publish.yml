@@ -22,4 +22,4 @@ jobs:
               id: changesets
               uses: changesets/action@v1
               with:
-                publish: pnpm run build
+                publish: pnpm publish
