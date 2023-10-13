@@ -1,6 +1,12 @@
 {
-	"name": "coulisse-svelte",
+	"name": "@arisbh/coulisse",
 	"version": "0.0.0",
+	"description": "Coulisse is a simple utility to sync multiple html scroll state, made for svelte",
+	"author": {
+		"name": "AristideBH",
+		"email": "aristide.bruneau@gmail.com",
+		"url": "https://github.com/AristideBH"
+	},
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build && npm run package",
