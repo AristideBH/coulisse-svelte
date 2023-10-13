@@ -1,6 +1,6 @@
 {
 	"name": "@arisbh/coulisse",
-	"version": "0.0.0",
+	"version": "0.0.1",
 	"description": "Coulisse is a simple utility to sync multiple html scroll state, made for svelte",
 	"author": {
 		"name": "AristideBH",
