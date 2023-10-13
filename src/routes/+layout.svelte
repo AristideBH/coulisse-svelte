@@ -9,7 +9,9 @@
 </svelte:head>
 
 <header class="sticky top-0 flex gap-3 flex-wrap justify-between items-baseline py-8">
-	<a href="/" class="text-foreground"><h1 class="tracking-wide">coulisse</h1></a>
+	<a href="/" class="text-foreground no-underline">
+		<h1 class="tracking-wide">coulisse</h1>
+	</a>
 	<nav class="ms-auto flex gap-3">
 		<code class="px-3 hidden sm:block">npm i @arisbh/coulisse</code>
 		<a href="/docs">Docs</a>
