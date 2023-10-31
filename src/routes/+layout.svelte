@@ -1,27 +1,29 @@
 <script>
-	import { autoModeWatcher } from '$lib/theme';
 	import '../app.postcss';
+	import { ModeWatcher, toggleMode } from 'mode-watcher';
+	import { Button } from '$lib/components/ui/button';
+	import { SunMoon } from 'lucide-svelte';
 </script>
 
-<svelte:head>
-	{@html `<script>${autoModeWatcher.toString()} autoModeWatcher();</script>`}
-	<title>Coulisse - Scroll synchronization utility for Svelte</title>
-</svelte:head>
+<ModeWatcher />
 
-<header class="sticky top-0 flex gap-3 flex-wrap justify-between items-baseline py-8">
-	<a href="/" class="text-foreground no-underline">
+<header
+	class="sticky top-0 z-10 flex flex-wrap items-center justify-between gap-3 py-8 mb-8 border-b bg-background"
+>
+	<a href="/" class="no-underline text-foreground">
 		<h1 class="tracking-wide">coulisse</h1>
 	</a>
-	<nav class="ms-auto flex gap-3">
-		<code class="px-3 hidden sm:block">npm i @arisbh/coulisse</code>
+	<nav class="flex gap-3 ms-auto">
+		<code class="hidden px-3 sm:block bg-muted">npm i @arisbh/coulisse</code>
 		<a href="/docs">Docs</a>
 		<a href="https://github.com/AristideBH/coulisse-svelte" target="_blank">GitHub</a>
 	</nav>
+	<Button variant="outline" size="icon" on:click={toggleMode}><SunMoon /></Button>
 </header>
 
 <slot />
 
-<footer class="flex gap-x-3 gap-y-1 flex-wrap items-center py-4">
+<footer class="flex flex-wrap items-center py-4 gap-x-3 gap-y-1">
 	<span class="me-auto">
 		Made with ♡ by <a href="https://github.com/AristideBH">@AristideBH</a>
 	</span>
