@@ -8,7 +8,7 @@
 
 	onMount(() => {
 		coulisse(pouliesBody, { decimal: 1 });
-		console.log(pouliesBody[0].getBoundingClientRect().y);
+		// console.log(pouliesBody[0].getBoundingClientRect().y);
 	});
 
 	let pouliesScrollables: HTMLElement[] = [];
