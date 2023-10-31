@@ -3,3 +3,7 @@
 </script>
 
 <slot />
+
+<svelte:head>
+	<title>Coulisse - Documentation</title>
+</svelte:head>

@@ -51,7 +51,6 @@
 		--ring: 142.4 71.8% 29.2%;
 
 		--ring: hsl(212.7, 26.8%, 83.9);
-		color-scheme: dark;
 	}
 }
 
@@ -69,7 +68,7 @@
 	}
 
 	h2 {
-		@apply mt-10 scroll-m-20 border-b pb-2 text-2xl font-semibold tracking-tight transition-colors first:mt-0;
+		@apply mt-14 mb-3 scroll-m-20 border-b pb-2 text-2xl font-semibold tracking-tight transition-colors first:mt-0;
 	}
 
 	h3 {
@@ -163,7 +162,7 @@
 
 /* Custom styles using @apply */
 table {
-	@apply border-collapse w-full rounded mt-4;
+	@apply border-collapse w-full rounded my-4;
 }
 
 thead {
@@ -173,4 +172,8 @@ thead {
 th,
 td {
 	@apply py-2 px-4 border-muted border;
+}
+
+p code {
+	@apply bg-muted font-mono;
 }
