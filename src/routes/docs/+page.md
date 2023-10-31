@@ -2,13 +2,11 @@
 
 Use your preferred node package manager.
 
-```bash
-npm i @arisbh/coulisse
+`npm i @arisbh/coulisse`
 
-pnpm add @arisbh/coulisse
+`pnpm add @arisbh/coulisse`
 
-yarn add @arisbh/coulisse
-```
+`yarn add @arisbh/coulisse`
 
 ## Usage
 

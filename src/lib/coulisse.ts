@@ -87,6 +87,9 @@ const coulisse = (elements: HTMLElement[], options: CoulisseOptions = defaults):
             el.scrollTop = scrollY;
             el.scrollLeft = scrollX;
         }
+
+        // debug(options, { scrollYPercentage, scrollXPercentage })
+
     };
 
 
@@ -152,6 +155,8 @@ const coulisse = (elements: HTMLElement[], options: CoulisseOptions = defaults):
             left: direction === 'x' ? left : (direction === 'y' ? document.body.scrollLeft : left),
             behavior: 'auto'
         });
+
+        // debug(options, percentages)
     };
 
 

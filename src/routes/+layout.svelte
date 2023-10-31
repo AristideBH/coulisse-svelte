@@ -15,20 +15,21 @@
 	</a>
 	<nav class="flex gap-1.5 ms-auto">
 		<!-- <code class="hidden px-3 sm:block bg-muted">npm i @arisbh/coulisse</code> -->
-		<Button variant="outline" class="no-underline" href="/docs">
-			<Book class="w-4 h-4 mr-2" />
-			Documentation</Button
-		>
-		<Button variant="outline" class="no-underline" href="/plugins">
+		<Button variant="outline" class="no-underline" href="/docs" title="Documentation">
+			<Book class="w-4 h-4" />
+			<span class="hidden sm:block sm:ml-2">Documentation</span>
+		</Button>
+		<!-- <Button variant="outline" class="no-underline" href="/plugins">
 			<Puzzle class="w-4 h-4 mr-2" />
 			Plugins</Button
-		>
+		> -->
 		<Button
 			variant="outline"
 			class="no-underline"
 			href="https://github.com/AristideBH/coulisse-svelte"
 			target="_blank"
 			size="icon"
+			title="GitHub page"
 		>
 			<Github class="w-4 h-4 " />
 		</Button>
