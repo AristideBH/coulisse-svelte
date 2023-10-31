@@ -41,7 +41,7 @@
 	<slot />
 </main>
 
-<footer class="flex flex-wrap items-center py-4 gap-x-3 gap-y-1">
+<footer class="flex flex-wrap items-center py-4 mt-5 gap-x-3 gap-y-1">
 	<span class="me-auto">
 		Made with ♡ by <a href="https://github.com/AristideBH">@AristideBH</a>
 	</span>
