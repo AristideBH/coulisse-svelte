@@ -52,7 +52,7 @@
 		class="px-0 mt-2 text-balance text-foreground hover:no-underline"
 		on:click={() => animateScroll.scrollToBottom()}
 	>
-		<ArrowDownWideNarrow class="w-4 h-4" />
+		<ArrowDownWideNarrow class="w-4 h-4 mr-2" />
 		Scroll in the container or in the body
 	</Button>
 	<div class="h-[57vh] w-full bg-red pointer-events-none"></div>
