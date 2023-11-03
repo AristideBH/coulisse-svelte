@@ -42,13 +42,3 @@
 </svelte:head>
 
 <slot />
-
-<footer class="flex flex-wrap items-center pt-8 mt-48 border-t gap-x-3 gap-y-1">
-	<span class="me-auto">
-		Made with ♡ by <a href="https://github.com/AristideBH">@AristideBH</a>
-	</span>
-	<span class="flex gap-3">
-		<a href="/docs">Docs</a>
-		<a href="https://github.com/AristideBH/coulisse-svelte" target="_blank">GitHub</a>
-	</span>
-</footer>

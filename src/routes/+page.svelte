@@ -3,6 +3,7 @@
 	import coulisse from '$lib';
 	import * as animateScroll from 'svelte-scrollto';
 	import { Button } from '$lib/components/ui/button';
+	import { ArrowDownWideNarrow } from 'lucide-svelte';
 
 	let pouliesBody: HTMLElement[] = [];
 
@@ -19,41 +20,46 @@
 	<meta name="description" content="A simple sync-scrolling utility for Sveltekit" />
 </svelte:head>
 
-<section class="z-50 flex flex-col items-start gap-4 mt-16 mb-16">
+<section class="z-50 flex flex-col items-start gap-4 mb-16">
 	<div class="max-w-2xl lead text-balance">
-		<p class="">
+		<p>
 			Coulisse is a simple and efficient Sveltekit library that lets you sync the scroll state of
-			multiple elements.
-			<!-- </p>
-		<p> -->
-			With Coulisse, you can create smooth and responsive scrolling effects to enhance user experience
-			and showcase your content.
+			multiple elements. With Coulisse, you can create smooth and responsive scrolling effects to
+			enhance user experience and showcase your content.
 		</p>
 	</div>
-	<button class="z-10 small" on:click={() => animateScroll.scrollTo({ element: '#demo1' })}>
-		Scroll the page for the basic demos
-	</button>
-	<div class="z-10 flex gap-2 mt-4">
+
+	<div class="flex flex-col items-start gap-6 gap-y-3">
+		<Button
+			variant="link"
+			class="px-0 text-foreground hover:no-underline"
+			on:click={() => animateScroll.scrollTo({ element: '#demo1' })}
+		>
+			<ArrowDownWideNarrow class="w-4 h-4 mr-2" />
+			Scroll for the basic demos
+		</Button>
 		<Button href="/docs" class="no-underline" variant="outline">Read the documentation</Button>
 	</div>
 </section>
 
-<section id="demo1" class="sticky top-[6rem] md:top-[9rem] flex flex-col z-10">
-	<p class="desc">This container is synced to the body.</p>
-	<div class="poulie h-[42vh]" bind:this={pouliesBody[0]}>
+<section id="demo1" class="sticky top-[6rem] md:top-[9rem] flex flex-col">
+	<p class="desc">This container is synced to the body</p>
+	<div class="poulie h-[50vh] lg:h-[50vh]" bind:this={pouliesBody[0]}>
 		<div class="grid-bg h-[150vh]" />
 	</div>
-	<button
-		class="z-20 mx-auto mt-4 small text-balance"
+	<Button
+		variant="link"
+		class="px-0 mt-2 text-balance text-foreground hover:no-underline"
 		on:click={() => animateScroll.scrollToBottom()}
 	>
-		Scroll either in the container or in the body to see more...
-	</button>
-	<div class="h-[64vh] w-full bg-red"></div>
+		<ArrowDownWideNarrow class="w-4 h-4" />
+		Scroll in the container or in the body
+	</Button>
+	<div class=" h-[50vh] lg:h-[50vh] w-full bg-red"></div>
 </section>
 
 <section id="demo2" class="flex flex-col">
-	<p class="desc">These two containers are in sync on both axis.</p>
+	<p class="desc">These containers are synced on both axis</p>
 	<div class="flex max-h-[24vh] gap-3">
 		<div class="w-1/2 poulie" bind:this={pouliesScrollables[0]}>
 			<div class="h-[150vh] w-[150vw]" />
@@ -64,7 +70,7 @@
 	</div>
 </section>
 
-<section class="z-10 flex flex-col items-start gap-2">
+<section class="z-30 flex flex-col items-start gap-2">
 	<p class="lead text-balance">Consult the documentation to install and options</p>
 	<Button href="/docs" class="no-underline" variant="outline">Read the documentation</Button>
 </section>

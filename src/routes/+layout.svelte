@@ -3,6 +3,7 @@
 	import { ModeWatcher, toggleMode } from 'mode-watcher';
 	import { Button } from '$lib/components/ui/button';
 	import { Github, Puzzle, Book } from 'lucide-svelte';
+	import { page } from '$app/stores';
 </script>
 
 <ModeWatcher />
@@ -37,6 +38,20 @@
 	<!-- <Button variant="outline" size="icon" on:click={toggleMode}><SunMoon /></Button> -->
 </header>
 
-<main class="my-8 grow">
+<main class="py-24 grow">
 	<slot />
 </main>
+
+<footer class="flex flex-wrap items-center py-4 border-t gap-x-3 gap-y-1">
+	<span class="me-auto">
+		Made with ♡ by <a href="https://github.com/AristideBH">@AristideBH</a>
+	</span>
+	<span class="flex gap-3">
+		{#if $page.route.id === '/'}
+			<a href="/docs">Docs</a>
+		{:else}
+			<a href="/">Home</a>
+		{/if}
+		<a href="https://github.com/AristideBH/coulisse-svelte" target="_blank">GitHub</a>
+	</span>
+</footer>

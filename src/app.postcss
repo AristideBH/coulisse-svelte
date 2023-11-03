@@ -154,9 +154,9 @@ main:has(section) {
 	@apply space-y-32;
 }
 
-section:last-of-type:not([hidden]) {
+/* section:last-of-type:not([hidden]) {
 	@apply !mt-0 py-16;
-}
+} */
 .container {
 	width: min(var(--max-width), calc(100% - 3rem));
 	margin-inline: auto;
@@ -183,7 +183,7 @@ p code {
 }
 
 p.desc {
-	@apply rounded-t w-fit px-2 bg-muted;
+	@apply rounded-t w-fit px-2 py-0.5 text-sm bg-muted;
 }
 
 code[class*='language-'] > span.token:first-of-type,
