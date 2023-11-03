@@ -10,31 +10,27 @@ Use your preferred node package manager.
 
 ## Usage
 
-First import the `coulisse` and `onMount`, and define an emtpy array to hold your scrolling elements, here named `poulies`.
+- Import the `coulisse` and `onMount`,
+- Define an emtpy array to hold your scrolling elements, here named `poulies`.
+- In your markup, bind as many scrolling elements as you like to the array.
+- Run coulisse inside onMount, passing the array.
 
-Then simply run coulisse, passing the array.
+```svelte
+<script lang="ts">
+	import { onMount } from 'svelte';
+	import coulisse from '@arisbh/coulisse';
 
-```ts
-import { onMount } from 'svelte';
-import coulisse from '@arisbh/coulisse';
+	let poulies: Array<HTMLElement> = [];
 
-let poulies: HTMLElement[] = [];
+	onMount(() => coulisse(poulies));
+</script>
 
-onMount(() => {
-	coulisse(poulies);
-});
-```
-
-Finally, in your markup, just bind your scrolling elements to the array :
-
-```html
-<div class="overflow-auto" bind:this="{poulies[0]}">
+<div class="overflow-auto" bind:this={poulies[0]}>
 	<!-- ... -->
 </div>
-<div class="overflow-auto" bind:this="{poulies[1]}">
+<div class="overflow-auto" bind:this={poulies[1]}>
 	<!-- ... -->
 </div>
-<!-- ... -->
 ```
 
 Note that we're passing a position to the array. Please make sure you're incrementing them properly.

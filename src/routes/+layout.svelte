@@ -8,7 +8,7 @@
 <ModeWatcher />
 
 <header
-	class="sticky top-0 z-10 flex flex-wrap items-center justify-between gap-3 py-8 border-b bg-background"
+	class="sticky top-0 z-50 flex flex-wrap items-center justify-between gap-3 py-8 border-b bg-background"
 >
 	<a href="/" class="no-underline text-foreground">
 		<h1 class="tracking-wide">coulisse</h1>
@@ -37,16 +37,6 @@
 	<!-- <Button variant="outline" size="icon" on:click={toggleMode}><SunMoon /></Button> -->
 </header>
 
-<main class="mt-8 grow">
+<main class="my-8 grow">
 	<slot />
 </main>
-
-<footer class="flex flex-wrap items-center py-4 mt-5 gap-x-3 gap-y-1">
-	<span class="me-auto">
-		Made with ♡ by <a href="https://github.com/AristideBH">@AristideBH</a>
-	</span>
-	<span class="flex gap-3">
-		<a href="/docs">Docs</a>
-		<a href="https://github.com/AristideBH/coulisse-svelte" target="_blank">GitHub</a>
-	</span>
-</footer>

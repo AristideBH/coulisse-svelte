@@ -150,23 +150,27 @@
 	}
 }
 
+main:has(section) {
+	@apply space-y-32;
+}
+
+section:last-of-type:not([hidden]) {
+	@apply !mt-0 py-16;
+}
 .container {
 	width: min(var(--max-width), calc(100% - 3rem));
 	margin-inline: auto;
 	padding-inline: 0;
 }
 
-.token.script {
-	@apply ps-4;
-}
-
 /* Custom styles using @apply */
 table {
 	@apply border-collapse w-full rounded my-4;
+	clip-path: inset(0% 0 0% 0% round 4px);
 }
 
-thead {
-	@apply bg-muted;
+thead tr th {
+	@apply bg-muted border-background;
 }
 
 th,
@@ -179,5 +183,32 @@ p code {
 }
 
 p.desc {
-	@apply rounded-t w-fit px-2 -mb-1 bg-muted;
+	@apply rounded-t w-fit px-2 bg-muted;
+}
+
+code[class*='language-'] > span.token:first-of-type,
+pre[class*='language-'] > span.token:first-of-type {
+	margin-left: -4px;
+}
+
+pre[class*='language-'] {
+	@apply relative;
+}
+
+pre[class*='language-'] button {
+	@apply h-8 rounded-md px-3
+		bg-secondary text-secondary-foreground hover:bg-secondary/80
+		absolute top-2 right-2 z-30;
+}
+
+pre[class*='language-'] button.success {
+	@apply border-green-400 border;
+}
+
+pre[class*='language-svelte'] {
+	@apply flex flex-col;
+}
+
+pre[class*='language-svelte'] span.script {
+	@apply flex flex-col ps-4;
 }

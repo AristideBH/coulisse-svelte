@@ -1,13 +1,14 @@
 import type { CoulisseOptions, ScrollPercentages } from "./types";
 import { terms, prompts, round, debug, defaults } from "./helpers";
-
 /**
  * Initializes Coulisse, a scroll synchronization utility, to enable synchronized scrolling for a group of HTML elements.
  *
  * @param {HTMLElement[]} elements - An array of HTML elements to enable synchronized scrolling.
  * @param {CoulisseOptions} [options=defaults] - Optional settings for scroll synchronization.
  */
+
 const coulisse = (elements: HTMLElement[], options: CoulisseOptions = defaults): void => {
+
     // Merged passed options with defaults
     const opt = { ...defaults, ...options }
 

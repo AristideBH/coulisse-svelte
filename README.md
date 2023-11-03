@@ -1,58 +1,107 @@
-# coulisse-svelte
+## Installation
 
-Everything you need to build a Svelte library, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+Use your preferred node package manager.
 
-Read more about creating a library [in the docs](https://kit.svelte.dev/docs/packaging).
+`npm i @arisbh/coulisse`
 
-## Creating a project
+`pnpm add @arisbh/coulisse`
 
-If you're seeing this, you've probably already done this step. Congrats!
+`yarn add @arisbh/coulisse`
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+## Usage
 
-# create a new project in my-app
-npm create svelte@latest my-app
+First import the `coulisse` and `onMount`, and define an emtpy array to hold your scrolling elements, here named `poulies`.
+
+Then simply run coulisse, passing the array.
+
+```ts
+import { onMount } from 'svelte';
+import coulisse from '@arisbh/coulisse';
+
+let poulies: HTMLElement[] = [];
+
+onMount(() => {
+	coulisse(poulies);
+});
 ```
 
-## Developing
+```svelte
+<script lang="ts">
+	import { onMount } from 'svelte';
+	import coulisse from '@arisbh/coulisse';
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+	let poulies: HTMLElement[] = [];
 
-```bash
-npm run dev
+	onMount(() => {
+		coulisse(poulies);
+	});
+</script>
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+<div class="overflow-auto" bind:this={poulies[0]}>
+	<!-- ... -->
+</div>
 ```
 
-Everything inside `src/lib` is part of your library, everything inside `src/routes` can be used as a showcase or preview app.
+Finally, in your markup, just bind your scrolling elements to the array :
 
-## Building
-
-To build your library:
-
-```bash
-npm run package
+```html
+<div class="overflow-auto" bind:this="{poulies[0]}">
+	<!-- ... -->
+</div>
+<div class="overflow-auto" bind:this="{poulies[1]}">
+	<!-- ... -->
+</div>
+<!-- ... -->
 ```
 
-To create a production version of your showcase app:
+Note that we're passing a position to the array. Please make sure you're incrementing them properly.
 
-```bash
-npm run build
+You can pass as many poulies as you like !
+
+## Options
+
+To pass options, you have two solutions.
+
+Directly inside the `coulisse` method :
+
+```js
+coulisse(poulies, {
+	decimal: 1,
+	direction: 'y',
+	bindBody: false,
+	debug: true
+});
 ```
 
-You can preview the production build with `npm run preview`.
+Or construct an object with the type `coulisseOptions` :
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+```ts
+import { coulisse, type CoulisseOptions } from '@arisbh/coulisse';
 
-## Publishing
+const options: CoulisseOptions = {
+	decimal: 1,
+	direction: 'y',
+	bindBody: false,
+	debug: true
+};
 
-Go into the `package.json` and give your package the desired name through the `"name"` option. Also consider adding a `"license"` field and point it to a `LICENSE` file which you can create from a template (one popular option is the [MIT license](https://opensource.org/license/mit/)).
-
-To publish your library to [npm](https://www.npmjs.com):
-
-```bash
-npm publish
+coulisse(poulies, options);
 ```
+
+Here are the default options when none are passed to the coulisse initialization.
+
+| Props       | Default    | Type                 | Description                                                       |
+| ----------- | ---------- | -------------------- | ----------------------------------------------------------------- |
+| `direction` | `'both'  ` | `'y', 'x' or 'both'` | This defines the allowed axis for the syncronization              |
+| `bindBody`  | `true`     | `boolean`            | Will the scrolling syncronization applies to the the body element |
+| `decimal`   | `3`        | `1, 2, 3, 4 or 5`    | This defines precision of the calculated percentage               |
+| `debug`     | `false`    | `boolean`            | Check your console with this on to get more info on your setup    |
+
+### bindBody
+
+As its name suggest, this options allows to sync the body scroll to your desired element.
+You must passed at least one poulie to the coulisse method with this options enabled for it to work.
+
+## Caveats
+
+use of smooth scroll

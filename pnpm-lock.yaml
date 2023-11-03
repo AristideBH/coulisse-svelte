@@ -85,6 +85,9 @@ devDependencies:
   svelte-check:
     specifier: ^3.5.2
     version: 3.5.2(postcss-load-config@4.0.1)(postcss@8.4.31)(svelte@4.2.2)
+  svelte-scrollto:
+    specifier: ^0.2.0
+    version: 0.2.0
   tailwindcss:
     specifier: ^3.3.5
     version: 3.3.5
@@ -3494,6 +3497,12 @@ packages:
       typescript: 5.2.2
     dev: true
 
+  /svelte-scrollto@0.2.0:
+    resolution: {integrity: sha512-l4K2E4jr6dXCODtZDCkpp/TzknVVoq8gecHM0UOOmihvLosczdyLuyDUhZ+U2HkhLWi7nnimuOstZSFKtXSpmA==}
+    dependencies:
+      svelte: 3.59.2
+    dev: true
+
   /svelte2tsx@0.6.23(svelte@4.2.2)(typescript@5.2.2):
     resolution: {integrity: sha512-3bwd1PuWUA3oEXy8+85zrLDnmJOsVpShpKVAehGWeYsz/66zMihTpRpUN97VVAKTZbO5tP4wnchHUXYs0zOwdw==}
     peerDependencies:
@@ -3504,6 +3513,11 @@ packages:
       pascal-case: 3.1.2
       svelte: 4.2.2
       typescript: 5.2.2
+    dev: true
+
+  /svelte@3.59.2:
+    resolution: {integrity: sha512-vzSyuGr3eEoAtT/A6bmajosJZIUWySzY2CzB3w2pgPvnkUjGqlDnsNnA0PMO+mMAhuyMul6C2uuZzY6ELSkzyA==}
+    engines: {node: '>= 8'}
     dev: true
 
   /svelte@4.2.2:
