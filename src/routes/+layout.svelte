@@ -8,7 +8,7 @@
 <ModeWatcher />
 
 <header
-	class="sticky top-0 z-50 flex flex-wrap items-center justify-between gap-3 py-8 border-b bg-background"
+	class="sticky top-0 z-50 flex flex-wrap items-center justify-between gap-3 py-4 border-b lg:py-8 bg-background"
 >
 	<a href="/" class="no-underline text-foreground">
 		<h1 class="tracking-wide">coulisse</h1>
