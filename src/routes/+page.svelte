@@ -20,7 +20,7 @@
 	<meta name="description" content="A simple sync-scrolling utility for Sveltekit" />
 </svelte:head>
 
-<section class="z-50 flex flex-col items-start gap-4 mb-16">
+<section class="flex flex-col items-start gap-4 mb-16">
 	<div class="max-w-2xl lead text-balance">
 		<p>
 			Coulisse is a simple and efficient Sveltekit library that lets you sync the scroll state of
@@ -42,7 +42,7 @@
 	</div>
 </section>
 
-<section id="demo1" class="sticky top-[6rem] md:top-[9rem] flex flex-col">
+<section id="demo1" class=" z-10 sticky top-[6rem] md:top-[9rem] flex flex-col">
 	<p class="desc">This container is synced to the body</p>
 	<div class="poulie h-[50vh] lg:h-[50vh]" bind:this={pouliesBody[0]}>
 		<div class="grid-bg h-[150vh]" />
@@ -55,10 +55,10 @@
 		<ArrowDownWideNarrow class="w-4 h-4" />
 		Scroll in the container or in the body
 	</Button>
-	<div class=" h-[50vh] lg:h-[50vh] w-full bg-red"></div>
+	<div class=" h-[50vh] lg:h-[50vh] w-full bg-red pointer-events-none"></div>
 </section>
 
-<section id="demo2" class="flex flex-col">
+<section id="demo2" class="z-20 flex flex-col">
 	<p class="desc">These containers are synced on both axis</p>
 	<div class="flex max-h-[24vh] gap-3">
 		<div class="w-1/2 poulie" bind:this={pouliesScrollables[0]}>
@@ -70,7 +70,7 @@
 	</div>
 </section>
 
-<section class="z-30 flex flex-col items-start gap-2">
+<section class="z-50 flex flex-col items-start gap-2 isolate">
 	<p class="lead text-balance">Consult the documentation to install and options</p>
 	<Button href="/docs" class="no-underline" variant="outline">Read the documentation</Button>
 </section>
