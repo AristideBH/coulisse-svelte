@@ -1,3 +1,7 @@
+## What does it do ?
+
+Coulisse is a simple Sveltekit component that allows to sync the scroll percentage of multiple elements, or even the body.
+
 ## Installation
 
 Use your preferred node package manager.
@@ -79,8 +83,9 @@ Here are the default options when none are passed to the coulisse initialization
 ### bindBody
 
 As its name suggest, this options allows to sync the body scroll to your desired element.
-You must passed at least one poulie to the coulisse method with this options enabled for it to work.
+You must pass at least one poulie to the coulisse method with this options enabled for it to work.
 
 ## Caveats
 
-use of smooth scroll
+- Unfortunately, using CSS proprety `scroll-behavior: smooth;` to set smooth scrolling break the use of Coulisse.
+  If you need to scroll to an anchor programaticaly, I've found that [svelte-scrollto](https://github.com/utherpally/svelte-scrollto-scrollto), even if archived, works well.

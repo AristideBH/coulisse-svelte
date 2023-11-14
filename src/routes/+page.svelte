@@ -42,10 +42,10 @@
 	</div>
 </section>
 
-<section id="demo1" class=" z-0 sticky top-[6rem] md:top-[9rem] flex flex-col">
+<section id="demo1" class="z-0 sticky top-[6rem] md:top-[9rem] flex flex-col">
 	<p class="desc">This container is synced to the body</p>
 	<div class="poulie h-[40vh] lg:h-[50vh]" bind:this={pouliesBody[0]}>
-		<div class="grid-bg h-[150vh]" />
+		<div class="grid-bg h-[200vh]" />
 	</div>
 	<Button
 		variant="link"
@@ -55,7 +55,7 @@
 		<ArrowDownWideNarrow class="w-4 h-4 mr-2" />
 		Scroll in the container or in the body
 	</Button>
-	<div class="h-[57vh] w-full bg-red pointer-events-none"></div>
+	<div class="h-[43vh] w-full bg-red pointer-events-none" />
 </section>
 
 <section id="demo2" class="flex-col">
@@ -70,8 +70,8 @@
 	</div>
 </section>
 
-<section class="flex flex-col items-start gap-2 isolate">
-	<p class="lead text-balance">Consult the documentation to install and options</p>
+<section class="flex flex-col items-start gap-2 mt-auto isolate">
+	<p class="lead text-balance">Want to install and customize Elaimant ?</p>
 	<Button href="/docs" class="no-underline" variant="outline">Read the documentation</Button>
 </section>
 
