@@ -23,9 +23,9 @@
 <section class="flex flex-col items-start gap-4 mb-16">
 	<div class="max-w-2xl lead text-balance">
 		<p>
-			Coulisse is a simple and efficient Sveltekit library that lets you sync the scroll state of
-			multiple elements. With Coulisse, you can create smooth and responsive scrolling effects to
-			enhance user experience and showcase your content.
+			Coulisse, pronounced [ku.lis] is a simple and efficient Sveltekit library that lets you sync
+			the scroll state of multiple elements. With Coulisse, you can create smooth and responsive
+			scrolling effects to enhance user experience and showcase your content.
 		</p>
 	</div>
 
