@@ -1,8 +1,8 @@
 <script>
 	import '../app.postcss';
-	import { ModeWatcher, toggleMode } from 'mode-watcher';
+	import { ModeWatcher } from 'mode-watcher';
 	import { Button } from '$lib/components/ui/button';
-	import { Github, Puzzle, Book } from 'lucide-svelte';
+	import { Github, Book } from 'lucide-svelte';
 	import { page } from '$app/stores';
 </script>
 
@@ -12,18 +12,13 @@
 	class="sticky top-0 z-50 flex flex-wrap items-center justify-between gap-3 py-4 border-b lg:py-8 bg-background"
 >
 	<a href="/" class="no-underline text-foreground">
-		<h1 class="tracking-wide">coulisse</h1>
+		<h1 class="tracking-wide">Coulisse</h1>
 	</a>
 	<nav class="flex gap-1.5 ms-auto">
-		<!-- <code class="hidden px-3 sm:block bg-muted">npm i @arisbh/coulisse</code> -->
 		<Button variant="outline" class="no-underline" href="/docs" title="Documentation">
 			<Book class="w-4 h-4" />
 			<span class="hidden sm:block sm:ml-2">Documentation</span>
 		</Button>
-		<!-- <Button variant="outline" class="no-underline" href="/plugins">
-			<Puzzle class="w-4 h-4 mr-2" />
-			Plugins</Button
-		> -->
 		<Button
 			variant="outline"
 			class="no-underline"
@@ -35,7 +30,6 @@
 			<Github class="w-4 h-4 " />
 		</Button>
 	</nav>
-	<!-- <Button variant="outline" size="icon" on:click={toggleMode}><SunMoon /></Button> -->
 </header>
 
 <main class="py-24 grow">

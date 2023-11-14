@@ -19,16 +19,16 @@ Use your preferred node package manager.
 - In your markup, bind as many scrolling elements as you like to the array.
 - Run coulisse inside onMount, passing the array.
 
+```ts
+import { onMount } from 'svelte';
+import coulisse from '@arisbh/coulisse';
+
+let poulies: Array<HTMLElement> = [];
+
+onMount(() => coulisse(poulies));
+```
+
 ```svelte
-<script lang="ts">
-	import { onMount } from 'svelte';
-	import coulisse from '@arisbh/coulisse';
-
-	let poulies: Array<HTMLElement> = [];
-
-	onMount(() => coulisse(poulies));
-</script>
-
 <div class="overflow-auto" bind:this={poulies[0]}>
 	<!-- ... -->
 </div>
@@ -37,9 +37,7 @@ Use your preferred node package manager.
 </div>
 ```
 
-Note that we're passing a position to the array. Please make sure you're incrementing them properly.
-
-You can pass as many poulies as you like !
+> Note that we're passing a position to the array when binding elements. Please make sure you are incrementing them properly.
 
 ## Options
 
@@ -73,19 +71,21 @@ coulisse(poulies, options);
 
 Here are the default options when none are passed to the coulisse initialization.
 
-| Props       | Default    | Type                 | Description                                                       |
-| ----------- | ---------- | -------------------- | ----------------------------------------------------------------- |
-| `direction` | `'both'  ` | `'y', 'x' or 'both'` | This defines the allowed axis for the syncronization              |
-| `bindBody`  | `true`     | `boolean`            | Will the scrolling syncronization applies to the the body element |
-| `decimal`   | `3`        | `1, 2, 3, 4 or 5`    | This defines precision of the calculated percentage               |
-| `debug`     | `false`    | `boolean`            | Check your console with this on to get more info on your setup    |
+| Props       | Default    | Type                 | Description                                             |
+| ----------- | ---------- | -------------------- | ------------------------------------------------------- |
+| `direction` | `'both'  ` | `'y', 'x' or 'both'` | This defines the allowed axis for the syncronization    |
+| `bindBody`  | `true`     | `boolean`            | Does the scrolling sync applies to the the body element |
+| `decimal`   | `3`        | `1, 2, 3, 4 or 5`    | This defines precision of the calculated percentage     |
+| `debug`     | `false`    | `boolean`            | Logs debugging informations in the console              |
 
 ### bindBody
 
 As its name suggest, this options allows to sync the body scroll to your desired element.
-You must pass at least one poulie to the coulisse method with this options enabled for it to work.
+To make it work, you must pass at least one poulie with this options enabled.
 
 ## Caveats
 
 - Unfortunately, using CSS proprety `scroll-behavior: smooth;` to set smooth scrolling break the use of Coulisse.
-  If you need to scroll to an anchor programaticaly, I've found that [svelte-scrollto](https://github.com/utherpally/svelte-scrollto-scrollto), even if archived, works well.
+  If you need to scroll to an anchor programaticaly, I have found that [svelte-scrollto](https://github.com/utherpally/svelte-scrollto-scrollto), even if archived, works well.
+
+If your encountered any bugs, feel free to open an issue on the Github page !
